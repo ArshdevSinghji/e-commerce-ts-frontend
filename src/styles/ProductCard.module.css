@@ -1,0 +1,27 @@
+.productCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    cursor: pointer;
+}
+.productCard img{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+}
+.productCard img + p{
+    color: #333;
+    align-self: flex-start;
+}
+.productCard div{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+}
+.productCard div span{
+    font-weight: 600;
+}

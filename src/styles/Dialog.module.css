@@ -1,0 +1,20 @@
+.dialog{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    margin-top: 20px;
+}
