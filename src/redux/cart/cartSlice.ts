@@ -24,6 +24,7 @@ export const cartSlice = createSlice({
                 return;
             }
             state.items.push(action.payload)
+            alert("Item added to cart");
         },
         removeFromCart: (state, action: PayloadAction<number>) => {
             state.items.splice(action.payload, 1);
