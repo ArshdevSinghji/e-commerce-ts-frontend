@@ -32,8 +32,8 @@ const ProductCard : React.FC<ProductCardProps> = (props) => {
       setOpenDialog(true);
     }
 
-    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
+    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement> | number) => {
+      if(typeof e !== "number") e.stopPropagation();
       dispatch(addToCart({
         title: title,
         price: price,
@@ -42,7 +42,7 @@ const ProductCard : React.FC<ProductCardProps> = (props) => {
       setOpenDialog(false);
     };
 
-    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
       e.stopPropagation();
       setOpenDialog(false);
     };

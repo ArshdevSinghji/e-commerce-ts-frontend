@@ -4,8 +4,8 @@ interface DialogProps {
     open: boolean;
     title: string;
     interaction: "addToCart" | "removeFromCart";
-    onConfirm?: (e: React.MouseEvent<HTMLButtonElement> & number) => void;
-    onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onConfirm?: (e: React.MouseEvent<HTMLButtonElement> | number) => void;
+    onCancel?: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
 }
 
 const Dialog : React.FC<DialogProps> = (props) => {
@@ -13,7 +13,7 @@ const Dialog : React.FC<DialogProps> = (props) => {
 
     if(!open) return null;
   return (
-    <div className={style.backdrop}>
+    <div className={style.backdrop} onClick={onCancel}>
         <div className={style.dialog}>
             <h1>Are You sure?</h1>
             {interaction === "addToCart" ? (
