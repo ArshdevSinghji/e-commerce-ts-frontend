@@ -1,38 +1,30 @@
 import style from "../styles/Dialog.module.css";
 
 interface DialogProps {
-    interaction: string;
-    title: string;
     open: boolean;
-    confirm: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
-    setConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+    title: string;
+    interaction: "addToCart" | "removeFromCart";
+    onConfirm?: (e: React.MouseEvent<HTMLButtonElement> & number) => void;
+    onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Dialog : React.FC<DialogProps> = (props) => {
-    const { interaction, setConfirm, setOpen, title } = props;
+    const { interaction, title, onConfirm, onCancel, open } = props;
 
-    const handleConfirm = () => {
-        setConfirm(true);
-        setOpen(false);
-    }
-
-    const handleCancel = () => {
-        setConfirm(false);
-        setOpen(false);
-    }
-
+    if(!open) return null;
   return (
-    <div className={style.dialog}>
-        <h1>Are You sure?</h1>
-        {interaction === "addToCart" ? (
-            <p>Do you want to add {title} in your cart?</p>
-        ) : (
-            <p>Do you want to remove {title} in your cart?</p>
-        )}
-        <div className={style.buttons}>
-            <button className="button_50" onClick={handleCancel}>Cancel</button>
-            <button className="button_50" onClick={handleConfirm}>Confirm</button>
+    <div className={style.backdrop}>
+        <div className={style.dialog}>
+            <h1>Are You sure?</h1>
+            {interaction === "addToCart" ? (
+                <p>Do you want to add <strong>{title}</strong> in your cart?</p>
+            ) : (
+                <p>Do you want to remove <strong>{title}</strong> in your cart?</p>
+            )}
+            <div className={style.buttons}>
+                <button className="button_50" onClick={onCancel}>Cancel</button>
+                <button className="button_50" onClick={onConfirm}>Confirm</button>
+            </div>
         </div>
     </div>
   )

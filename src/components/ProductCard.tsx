@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/ProductCard.module.css"
 import { useAppDispatch } from "../redux/hooks";
 import { addToCart } from "../redux/cart/cartSlice";
-// import { useState } from "react";
-// import Dialog from "./Dialog";
+import { useState } from "react";
+import Dialog from "./Dialog";
 
 interface ProductCardProps {
     id: number;
@@ -16,11 +16,10 @@ const ProductCard : React.FC<ProductCardProps> = (props) => {
     const dispatch = useAppDispatch();
 
     const { id, title, price, brand, thumbnail } = props;
-    // const [openDialog, setOpenDialog] = useState<boolean>(false);
-
-    // const [confirm, setConfirm] = useState<boolean>(false);
 
     const navigate = useNavigate();
+
+    const [openDialog, setOpenDialog] = useState(false);
 
     const handlePage = () => {
       navigate("/product", {
@@ -30,13 +29,23 @@ const ProductCard : React.FC<ProductCardProps> = (props) => {
 
     const handleCart = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      // setOpenDialog(true);
+      setOpenDialog(true);
+    }
+
+    const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
       dispatch(addToCart({
         title: title,
         price: price,
         image: thumbnail
       }));
-    }
+      setOpenDialog(false);
+    };
+
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      setOpenDialog(false);
+    };
     
   return (
     <div className={styles.productCard} onClick={handlePage}>
@@ -47,14 +56,15 @@ const ProductCard : React.FC<ProductCardProps> = (props) => {
         <span>${price}</span>
       </div>
       <button className="button" onClick={handleCart}>Add to Cart</button>
-      {/* {openDialog && 
-        <Dialog 
+      {openDialog && (
+        <Dialog
+          open={openDialog}
+          title={title}
           interaction="addToCart"
-          title = {title}
-          open = {openDialog}
-          confirm = {confirm}
-          setOpen = {setOpenDialog}
-          setConfirm = {setConfirm} />} */}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   )
 }
