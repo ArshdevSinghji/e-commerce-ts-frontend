@@ -42,7 +42,7 @@ const SignUp = () => {
                 password: data.password,
             }))
             reset()
-            navigate("/signin")
+            navigate("/")
         })}>
             <p>create a new account</p>
 

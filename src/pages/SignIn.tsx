@@ -46,7 +46,7 @@ const SignIn = () => {
                   }
                 );
                 reset();
-                navigate("/");
+                navigate("/home");
               } catch (e) {
                 console.error(e);
                 toast.error("Credentials don't match!");
