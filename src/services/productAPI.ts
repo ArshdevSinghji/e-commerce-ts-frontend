@@ -1,22 +1,11 @@
-import { AxiosInstance } from './AxiosInstance';
+import { AxiosInstance } from "./AxiosInstance";
 
-export interface Products{
-    id: number;
-    title: string;
-    price: number;
-    brand: string;
-    thumbnail: string;
-}
-
-export interface Product{
-    id: number;
-    title: string;
-    price: number;
-    brand: string;
-    description: string;
-    category: string;
-    images: string[];
-    thumbnail: string;
+export interface Products {
+  id: number;
+  title: string;
+  price: number;
+  brand: string;
+  thumbnail: string;
 }
 
 export const fetchData = async (
@@ -27,7 +16,9 @@ export const fetchData = async (
   setLoading: (loading: boolean) => void
 ): Promise<void> => {
   try {
-    const res = await AxiosInstance.get(`?limit=${PAGE_SIZE}&skip=${currentPage * PAGE_SIZE}`);
+    const res = await AxiosInstance.get(
+      `?limit=${PAGE_SIZE}&skip=${currentPage * PAGE_SIZE}`
+    );
     setTotal(res.data.total);
     setProduct(res.data.products);
   } catch (err) {
@@ -36,18 +27,3 @@ export const fetchData = async (
     setLoading(false);
   }
 };
-
-export const fecthProductById = async (
-  id: number,
-  setProductByID: (product: Product) => void,
-  setLoading: (loading: boolean) => void
-): Promise<void> => {
-  try {
-    const res = await AxiosInstance.get(`/${id}`);
-    setProductByID(res.data);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    setLoading(false);
-  }
-}

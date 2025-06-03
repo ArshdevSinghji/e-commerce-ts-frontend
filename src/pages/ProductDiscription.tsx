@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-// import { fecthProductById, type Product } from "../services/productAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import style from "../styles/Product.module.css";
@@ -14,13 +13,9 @@ const ProductDiscription: React.FC = () => {
   const location = useLocation();
   const id: number = location.state;
 
-  // const [product, setProductByID] = useState<Product | null>(null);
-  // const [loading, setLoading] = useState<boolean>(true);
-
   const product = useAppSelector((state) => state.product);
 
   useEffect(() => {
-    // fecthProductById(id, setProductByID, setLoading);
     dispatch(fetchProductById(id));
   }, []);
 
